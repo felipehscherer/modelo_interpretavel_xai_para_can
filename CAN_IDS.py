@@ -15,9 +15,11 @@ encoder = LabelEncoder()
 
 # Carregar os datasets
 # df1 é o dataset sem ataque e o df2 com ataque
-df = pd.read_parquet('repository/dump6.parquet')
+df_safe = pd.read_parquet('repository/dataset')
+df_attack = pd.read_parquet('repository/dataset_attack')
 
 # Combinar os datasets
+df = pd.concat([df_safe, df_attack], ignore_index=True)
 
 # Codificar colunas do tipo object
 df['112_CUR_GR'] = encoder.fit_transform(df['112_CUR_GR'])
